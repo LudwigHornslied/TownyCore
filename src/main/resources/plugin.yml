@@ -1,0 +1,7 @@
+name: TownyCore
+version: ${project.version}
+main: io.nebulamc.townycore.Main
+api-version: 1.16
+authors: [ NebulaTeam ]
+description: This plugin will be utilized for Nebula Earth Towny Server
+website: https://nebulamc.io/
