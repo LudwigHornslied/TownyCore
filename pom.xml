@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.nebulamc</groupId>
-    <artifactId>TownyCore</artifactId>
-    <version>1.0</version>
+    <artifactId>Core</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>TownyCore</name>
+    <name>Core</name>
 
-    <description>This plugin will be utilized for Nebula Earth Towny Server</description>
+    <description>The Main Core Plugin for Nebula Towny</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>https://nebulamc.io/</url>
+    <url>https://nebulamc.io/plugins/core</url>
 
     <build>
         <plugins>
@@ -56,7 +56,7 @@
 
     <repositories>
         <repository>
-            <id>papermc-repo</id>
+            <id>papermc</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
         <repository>
@@ -67,9 +67,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
+            <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

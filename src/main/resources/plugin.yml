@@ -1,7 +1,18 @@
-name: TownyCore
+name: Core
 version: ${project.version}
-main: io.nebulamc.townycore.Main
-api-version: 1.16
-authors: [ NebulaTeam ]
-description: This plugin will be utilized for Nebula Earth Towny Server
-website: https://nebulamc.io/
+main: io.nebulamc.core.Core
+api-version: 1.17
+authors: [ 0xBit ]
+description: The Main Core Plugin for Nebula Towny
+website: https://nebulamc.io/plugins/core
+permissions:
+  nebula.core.rtp:
+    description: Allows you to use /rtp
+    default: op
+commands:
+  rtp:
+    description: Teleports you to a random location.
+    permission: nebula.core.rtp
+    permission-message: You do not have permission to run this command!
+    usage: /rtp <player> <x> <z>
+
