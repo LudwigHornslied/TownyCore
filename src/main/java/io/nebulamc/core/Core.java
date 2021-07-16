@@ -2,6 +2,7 @@ package io.nebulamc.core;
 
 import io.nebulamc.core.Commands.RTP;
 import io.nebulamc.core.Listeners.EventListener;
+import io.nebulamc.core.Util.Translation;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,10 +23,16 @@ public final class Core extends JavaPlugin {
         //Register EventListeners
         getServer().getPluginManager().registerEvents(new EventListener(), this);
 
+        Translation.loadStrings();
+
         //Register Commands
         log.info("§5= §bRegistering Commands");
         Objects.requireNonNull(getCommand("rtp")).setExecutor(new RTP());
 
+    }
+
+    public static Core getInstance() {
+        return instance;
     }
 
     @Override
