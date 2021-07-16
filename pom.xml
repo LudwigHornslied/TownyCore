@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.nebulamc</groupId>
-    <artifactId>Core</artifactId>
+    <artifactId>TownyCore</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Core</name>
+    <name>TownyCore</name>
 
     <description>The Main Core Plugin for Nebula Towny</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>https://nebulamc.io/plugins/core</url>
+    <url>https://nebulamc.io/plugins/TownyCore</url>
 
     <build>
         <plugins>
