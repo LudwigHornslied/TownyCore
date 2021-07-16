@@ -21,6 +21,9 @@ public class RTP implements CommandExecutor {
 
         // Parse the arguments
         Player victim = Bukkit.getPlayer(args[0]);
+        if(victim == null) {
+            sender.sendMessage(Core.prefix + Translation.get("player_not_exist"));
+        }
 
         double x, z;
         try {
@@ -31,20 +34,25 @@ public class RTP implements CommandExecutor {
             return true;
         }
 
-        assert victim != null;
-        Location loc = new Location(victim.getWorld(), x, 62.0, z);
 
-        int i = 1;
-        while(i < 20) {
-            //Attempt 20 times
-            if (!LocationCheck.isSafeLocation(loc)) {
-                loc.add(0, 2, 0);
-            } else {
-                victim.teleport(loc);
-                sender.sendMessage(Core.prefix + Translation.get("teleported_safe"));
-                return true;
+        for(int i = 0; i < 20; i++) {
+            // Get a random offset within 2000 blocks
+            double angle = Math.random() * 360;
+            double distance = Math.random() * 2000;
+
+            double x_off = Math.sin(angle) * distance;
+            double z_off = Math.cos(angle) * distance;
+
+            Location loc = new Location(victim.getWorld(), x + x_off, 62.0, z + z_off);
+            for(int j = 0; j < 20; j++) {
+                if (!LocationCheck.isSafeLocation(loc)) {
+                    loc.add(0, 2, 0);
+                } else {
+                    victim.teleport(loc);
+                    sender.sendMessage(Core.prefix + Translation.get("teleported_safe"));
+                    return true;
+                }
             }
-            i++;
         }
 
         sender.sendMessage(Core.prefix + Translation.get("not_teleported_safe"));
