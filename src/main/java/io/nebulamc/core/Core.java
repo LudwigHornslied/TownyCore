@@ -19,7 +19,7 @@ public final class Core extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        log.info("§e======= §5Nebula Core §e=======");
+        log.info("§e======= §5Nebula TownyCore §e=======");
         //Register EventListeners
         getServer().getPluginManager().registerEvents(new EventListener(), this);
 
