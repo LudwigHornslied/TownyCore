@@ -53,7 +53,7 @@ public class EventListener implements Listener {
         }
 
         if (!player.hasPlayedBefore()) {
-            Bukkit.broadcastMessage(Core.prefix + ChatColor.BOLD + "Welcome " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + player.getName() + ChatColor.YELLOW + ChatColor.BOLD + " to" + ChatColor.GREEN + ChatColor.BOLD + " EarthPol!");
+            Bukkit.broadcastMessage(Core.prefix + ChatColor.BOLD + "Welcome " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + player.getName() + ChatColor.YELLOW + ChatColor.BOLD + " to" + ChatColor.GREEN + ChatColor.BOLD + " Nebula Towny!");
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.5f, 1.0f);
 
             TextComponent guide = new TextComponent("§3Get started by using our §e[§bGuide§e]");
