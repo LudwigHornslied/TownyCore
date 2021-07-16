@@ -49,7 +49,9 @@ public class RTP implements CommandExecutor {
                                     victim.teleport(loc);
                                     player.sendMessage(Core.prefix + "Player teleported to a safe location.");
                                     break;
+
                                 }
+                                i++; //retard.
                             }
 
 
