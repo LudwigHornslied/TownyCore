@@ -44,7 +44,7 @@ public class EventListener implements Listener {
         World world = player.getWorld();
         int onlinePlayers = onlinePlayerCount();
 
-        if (onlinePlayers >= 80) {
+        if (onlinePlayers >= 60) {
             if (mobSpawning) {
                 world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
                 Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.RED + "Disabled");
@@ -53,7 +53,6 @@ public class EventListener implements Listener {
         }
 
         if (!player.hasPlayedBefore()) {
-            Bukkit.broadcastMessage(Core.prefix + ChatColor.BOLD + "Welcome " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + player.getName() + ChatColor.YELLOW + ChatColor.BOLD + " to" + ChatColor.GREEN + ChatColor.BOLD + " Nebula Towny!");
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.5f, 1.0f);
 
             TextComponent guide = new TextComponent("§3Get started by using our §e[§bGuide§e]");
@@ -86,7 +85,7 @@ public class EventListener implements Listener {
         World world = player.getWorld();
         int onlinePlayers = onlinePlayerCount();
 
-        if (onlinePlayers <= 80) {
+        if (onlinePlayers <= 61) {
             if (!mobSpawning) {
                 world.setGameRule(GameRule.DO_MOB_SPAWNING, true);
                 Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.GREEN + "Enabled");
