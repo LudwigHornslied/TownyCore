@@ -2,6 +2,7 @@ package io.nebulamc.core;
 
 import io.nebulamc.core.Commands.RTP;
 import io.nebulamc.core.Listeners.EventListener;
+import io.nebulamc.core.Tasks.MobSpawning;
 import io.nebulamc.core.Util.Translation;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +25,8 @@ public final class Core extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventListener(), this);
 
         Translation.loadStrings();
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new MobSpawning(this), 0L, 20L);
 
         //Register Commands
         log.info("§5= §bRegistering Commands");

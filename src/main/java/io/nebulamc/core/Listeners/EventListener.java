@@ -11,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -20,6 +21,10 @@ public class EventListener implements Listener {
     @EventHandler
     public void preMobSpawn(PreCreatureSpawnEvent event) {
         EntityType ent = event.getType();
+
+        if(event.getReason() == CreatureSpawnEvent.SpawnReason.COMMAND) {
+            return;
+        }
 
         if (ent == EntityType.RABBIT ||
                 ent == EntityType.POLAR_BEAR ||
@@ -41,16 +46,6 @@ public class EventListener implements Listener {
     @EventHandler
     public void playerLogin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        World world = player.getWorld();
-        int onlinePlayers = onlinePlayerCount();
-
-        if (onlinePlayers >= 60) {
-            if (mobSpawning) {
-                world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
-                Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.RED + "Disabled");
-                mobSpawning = false;
-            }
-        }
 
         if (!player.hasPlayedBefore()) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.5f, 1.0f);
@@ -77,24 +72,5 @@ public class EventListener implements Listener {
 
         }
 
-    }
-
-    @EventHandler
-    public void playerLogout(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        int onlinePlayers = onlinePlayerCount();
-
-        if (onlinePlayers <= 61) {
-            if (!mobSpawning) {
-                world.setGameRule(GameRule.DO_MOB_SPAWNING, true);
-                Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.GREEN + "Enabled");
-                mobSpawning = true;
-            }
-        }
-    }
-
-    public int onlinePlayerCount() {
-        return Core.instance.getServer().getOnlinePlayers().size();
     }
 }
