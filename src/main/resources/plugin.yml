@@ -12,11 +12,16 @@ permissions:
 commands:
   rtp:
     description: Teleports you to a random location.
-    permission: nebula.core.rtp
+    permission: nebula.command.rtp
     permission-message: You do not have permission to run this command!
     usage: /rtp <player> <x> <z>
   mapcolor:
-    description: Use /mapcolor
-    permission: group.vipplus
+    description: Allows VIP+ to set their nations map color on the Dynmap!
+    permission: nebula.command.mapcolor
     permission-message: You do not have permission to run this command!
-    usage: /mapcolor color
+    usage: /mapcolor <color>
+  core:
+    description: Informational Panel about Nebula Towny Core.
+    permission: nebula.command.core
+    permission-message: You do not have permission to run this command!
+    usage: /core <args>

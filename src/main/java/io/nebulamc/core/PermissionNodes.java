@@ -2,7 +2,11 @@ package io.nebulamc.core;
 
 public class PermissionNodes {
 
-    public final String baseCommand = "nebula.townycore";
-    public final String rtpCommand = "nebula.townycore.rtp";
+    /*================================
+      Nebula: Command Permission Nodes
+     ================================*/
+    public final String baseCommand = "nebula.command.core";
+    public final String rtpCommand = "nebula.command.rtp";
+    public final String mapColor = "nebula.command.mapcolor";
 
 }

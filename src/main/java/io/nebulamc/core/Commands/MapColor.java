@@ -19,7 +19,7 @@ public class MapColor implements CommandExecutor {
             Player player = (Player) sender;
 
             if(args.length > 0){
-                if(player.hasPermission("group.vipplus")){
+                if(player.hasPermission("nebula.command.mapcolor")){
                     String playerName = player.getName();
 
                     try {
@@ -202,7 +202,7 @@ public class MapColor implements CommandExecutor {
                                             break;
                                         case "colors":
                                         default:
-                                            player.sendMessage("§e==========[COLORS]==========");
+                                            player.sendMessage("§b==========[COLORS]==========");
                                             player.sendMessage("§3aqua, azure, beige, black, blue, brown, cyan, darkblue,");
                                             player.sendMessage("§3darkcyan, darkgrey, darkgreen, darkkhaki, darkmagenta,");
                                             player.sendMessage("§3darkolivegreen, darkorange, darkorchid, darkred, darksalmon,");
@@ -210,7 +210,7 @@ public class MapColor implements CommandExecutor {
                                             player.sendMessage("§3lightcyan, lightgreen, lightgrey, lightpink, lightyellow,");
                                             player.sendMessage("§3lime, magenta, maroon, navy, olive, orange, pink, purple,");
                                             player.sendMessage("§3violet, red, silver, white, yellow");
-                                            player.sendMessage("§e===========================");
+                                            player.sendMessage("§b===========================");
                                             break;
                                     }
                                 } else {
@@ -230,16 +230,16 @@ public class MapColor implements CommandExecutor {
                     }
 
                 } else {
-                    player.sendMessage(Core.prefix + "You must be §dPremium §eto use that command.");
+                    player.sendMessage(Core.prefix + "§eYou must be §dVIP+ §eto use that command.");
                 }
             } else {
-                player.sendMessage(Core.prefix + "Incorrect Usage: Please specific a color.");
-                player.sendMessage(Core.prefix + "Correct Usage: [/mapcolor <color>]");
+                player.sendMessage(Core.prefix + "§eIncorrect Usage: §ePlease specific a §ac§bo§cl§do§5r.");
+                player.sendMessage(Core.prefix + "§eCorrect Usage: [§c/mapcolor <color>§e]");
             }
 
 
         } else {
-            Bukkit.getLogger().info("[EP-Core]: You need to be a player to execute this command.");
+            Bukkit.getLogger().info("[TownyCore]: You need to be a player to execute this command.");
         }
         return false;
     }
