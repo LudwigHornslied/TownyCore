@@ -15,4 +15,8 @@ commands:
     permission: nebula.core.rtp
     permission-message: You do not have permission to run this command!
     usage: /rtp <player> <x> <z>
-
+  mapcolor:
+    description: Use /mapcolor
+    permission: group.vipplus
+    permission-message: You do not have permission to run this command!
+    usage: /mapcolor color

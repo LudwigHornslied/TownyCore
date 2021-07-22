@@ -1,5 +1,6 @@
 package io.nebulamc.core;
 
+import io.nebulamc.core.Commands.MapColor;
 import io.nebulamc.core.Commands.RTP;
 import io.nebulamc.core.Listeners.EventListener;
 import io.nebulamc.core.Tasks.MobSpawning;
@@ -31,6 +32,7 @@ public final class Core extends JavaPlugin {
         //Register Commands
         log.info("§5= §bRegistering Commands");
         Objects.requireNonNull(getCommand("rtp")).setExecutor(new RTP());
+        Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColor());
 
     }
 

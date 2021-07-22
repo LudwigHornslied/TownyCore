@@ -37,7 +37,11 @@ public class EventListener implements Listener {
                 ent == EntityType.TROPICAL_FISH ||
                 ent == EntityType.LLAMA ||
                 ent == EntityType.TRADER_LLAMA ||
-                ent == EntityType.VEX
+                ent == EntityType.VEX ||
+                ent == EntityType.GLOW_SQUID ||
+                ent == EntityType.AXOLOTL ||
+                ent == EntityType.SKELETON_HORSE ||
+                ent == EntityType.DOLPHIN
                 ) {
             event.setCancelled(true);
         }
