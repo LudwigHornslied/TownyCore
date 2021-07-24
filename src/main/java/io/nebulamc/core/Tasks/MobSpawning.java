@@ -22,11 +22,11 @@ public class MobSpawning implements Runnable {
 
         if(tps < 18 && this.spawning) {
             this.spawning = false;
-            Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.RED + "Disabled");
+            Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.RED + "disabled" + ChatColor.WHITE + "!");
             update();
         } else if(tps > 18 && !this.spawning) {
             this.spawning = true;
-            Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.GREEN + "Enabled");
+            Bukkit.broadcastMessage(Core.prefix + "Mob Spawning has been " + ChatColor.GREEN + "enabled" + ChatColor.WHITE + "!");
             update();
         }
     }
