@@ -6,6 +6,7 @@ import io.nebulamc.core.Commands.RTP;
 import io.nebulamc.core.Listeners.EventListener;
 import io.nebulamc.core.Tasks.MobSpawning;
 import io.nebulamc.core.Util.Translation;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,7 +17,7 @@ public final class Core extends JavaPlugin {
 
     public static Core instance;
     public static Logger log = Bukkit.getLogger();
-    public static String prefix = "[NEBULA]: ";
+    public static String prefix = ChatColor.of("#BAE6FF") + "N" + ChatColor.of("#BADDFF") + "e" + ChatColor.of("#BAD4FF") + "b" + ChatColor.of("#BBCBFF") + "u" + ChatColor.of("#BBC2FF") + "l" + ChatColor.of("#BCBAFF") + "a" +" ";
     public static String discord = "https://discord.gg/nebulamc";
 
     @Override
