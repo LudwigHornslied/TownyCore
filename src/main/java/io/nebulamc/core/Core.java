@@ -17,7 +17,7 @@ public final class Core extends JavaPlugin {
 
     public static Core instance;
     public static Logger log = Bukkit.getLogger();
-    public static String prefix = ChatColor.of("#BAE6FF") + "N" + ChatColor.of("#BADDFF") + "e" + ChatColor.of("#BAD4FF") + "b" + ChatColor.of("#BBCBFF") + "u" + ChatColor.of("#BBC2FF") + "l" + ChatColor.of("#BCBAFF") + "a" +" ";
+    public static String prefix = ChatColor.of("#BAE6FF").toString() + ChatColor.BOLD + "N" + ChatColor.of("#BADDFF").toString() + ChatColor.BOLD + "e" + ChatColor.of("#BAD4FF").toString() + ChatColor.BOLD + "b" + ChatColor.of("#BBCBFF").toString() + ChatColor.BOLD + "u" + ChatColor.of("#BBC2FF").toString() + ChatColor.BOLD + "l" + ChatColor.of("#BCBAFF").toString() + ChatColor.BOLD + "a" + ChatColor.of("#ecabff").toString() + ChatColor.BOLD + "Towny " + ChatColor.WHITE + "• ";
     public static String discord = "https://discord.gg/nebulamc";
 
     @Override
