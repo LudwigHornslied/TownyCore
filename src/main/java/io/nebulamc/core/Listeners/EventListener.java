@@ -56,7 +56,7 @@ public class EventListener implements Listener {
 
             TextComponent guide = new TextComponent("§3Get started by using our §e[§bGuide§e]");
             guide.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§aOpens link to the Guide on the web browser.").create()));
-            guide.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://nebulamc.io/towny/guide"));
+            guide.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://nebulamc.io/earth/#guide"));
 
             TextComponent map = new TextComponent("§3See where you are in the world using the §e[§bMap§e]");
             map.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§aOpens link to the DynMap on your web browser.").create()));
@@ -64,7 +64,7 @@ public class EventListener implements Listener {
 
             TextComponent rules = new TextComponent("§3Make sure to read the §e[§bRules§e]");
             rules.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§aOpens link to the rules on your web browser.").create()));
-            rules.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://nebulamc.io/rules"));
+            rules.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://nebulamc.io/earth/rules"));
 
             player.sendMessage("§e==========[ WELCOME ]==========");
             player.sendMessage(guide);
