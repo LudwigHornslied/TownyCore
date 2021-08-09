@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -87,6 +88,16 @@ public class EventListener implements Listener {
                 Bukkit.getPlayer(event.getWhoClicked().getUniqueId()).sendMessage(prefix + "You can not move that item into shulkers!");
             }
 
+        }
+    }
+
+    @EventHandler
+    public void onHopperPlace(BlockPlaceEvent event) {
+        if(event.getBlockPlaced().getType() == Material.HOPPER || event.getBlockPlaced().getType() == Material.HOPPER_MINECART){
+            if(event.getBlockAgainst().getType() == Material.SHULKER_BOX){
+                event.setCancelled(true);
+                event.getPlayer().sendMessage(prefix + "You can not place hoppers going into shulkers!");
+            }
         }
     }
 }
