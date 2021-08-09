@@ -94,7 +94,7 @@ public class EventListener implements Listener {
     @EventHandler
     public void onHopperPlace(BlockPlaceEvent event) {
         if(event.getBlockPlaced().getType() == Material.HOPPER || event.getBlockPlaced().getType() == Material.HOPPER_MINECART){
-            if(event.getBlockAgainst().getType() == Material.SHULKER_BOX){
+            if(event.getBlockAgainst().getType() == Material.SHULKER_BOX || event.getBlockAgainst().getType() == Material.BLACK_SHULKER_BOX || event.getBlockAgainst().getType() == Material.WHITE_SHULKER_BOX || event.getBlockAgainst().getType() == Material.BLUE_SHULKER_BOX || event.getBlockAgainst().getType() == Material.CYAN_SHULKER_BOX || event.getBlockAgainst().getType() == Material.BROWN_SHULKER_BOX || event.getBlockAgainst().getType() == Material.GRAY_SHULKER_BOX || event.getBlockAgainst().getType() == Material.GREEN_SHULKER_BOX || event.getBlockAgainst().getType() == Material.LIGHT_BLUE_SHULKER_BOX || event.getBlockAgainst().getType() == Material.LIGHT_GRAY_SHULKER_BOX || event.getBlockAgainst().getType() == Material.LIME_SHULKER_BOX || event.getBlockAgainst().getType() == Material.MAGENTA_SHULKER_BOX || event.getBlockAgainst().getType() == Material.ORANGE_SHULKER_BOX || event.getBlockAgainst().getType() == Material.PINK_SHULKER_BOX || event.getBlockAgainst().getType() == Material.PURPLE_SHULKER_BOX || event.getBlockAgainst().getType() == Material.RED_SHULKER_BOX || event.getBlockAgainst().getType() == Material.YELLOW_SHULKER_BOX){
                 event.setCancelled(true);
                 event.getPlayer().sendMessage(prefix + "You can not place hoppers going into shulkers!");
             }
