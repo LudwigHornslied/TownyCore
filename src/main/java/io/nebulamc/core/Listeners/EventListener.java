@@ -7,17 +7,27 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Shulker;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.inventory.*;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.UUID;
+
+import static io.nebulamc.core.Core.prefix;
 
 public class EventListener implements Listener {
     boolean mobSpawning;
-
+    boolean inShulker = false;
     @EventHandler
     public void preMobSpawn(PreCreatureSpawnEvent event) {
         EntityType ent = event.getType();
@@ -76,5 +86,17 @@ public class EventListener implements Listener {
 
         }
 
+    }
+
+
+    @EventHandler
+    public void onInventoryMove(InventoryClickEvent event) {
+        if (event.getInventory().getType() == InventoryType.SHULKER_BOX) {
+            if(event.getCurrentItem().getType() == Material.GOLDEN_APPLE || event.getCurrentItem().getType() == Material.ENCHANTED_GOLDEN_APPLE || event.getCurrentItem().getType() == Material.EXPERIENCE_BOTTLE || event.getCurrentItem().getType() == Material.POTION || event.getCurrentItem().getType() == Material.SPLASH_POTION || event.getCurrentItem().getType() == Material.LINGERING_POTION){
+                event.setCancelled(true);
+                Bukkit.getPlayer(event.getWhoClicked().getUniqueId()).sendMessage(prefix + "You can not move that item into shulkers!");
+            }
+
+        }
     }
 }
