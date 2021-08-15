@@ -1,7 +1,6 @@
-package io.nebulamc.core.Util;
+package io.nebulamc.core.util;
 
 import io.nebulamc.core.Core;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
