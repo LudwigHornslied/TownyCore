@@ -1,5 +1,6 @@
 package io.nebulamc.core;
 
+import io.nebulamc.core.combat.CombatHandler;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
@@ -27,18 +28,24 @@ public final class Core extends JavaPlugin {
     public static final String PREFIX = ChatColor.of("#BAE6FF").toString() + ChatColor.BOLD + "N" + ChatColor.of("#BADDFF").toString() + ChatColor.BOLD + "e" + ChatColor.of("#BAD4FF").toString() + ChatColor.BOLD + "b" + ChatColor.of("#BBCBFF").toString() + ChatColor.BOLD + "u" + ChatColor.of("#BBC2FF").toString() + ChatColor.BOLD + "l" + ChatColor.of("#BCBAFF").toString() + ChatColor.BOLD + "a" + ChatColor.of("#ecabff").toString() + ChatColor.BOLD + " Towny " + ChatColor.WHITE + "• " + ChatColor.RESET + "§6";
     public static final String DISCORD = "https://discord.gg/nebulamc";
 
+    private CombatHandler combatHandler;
+
+    public CombatHandler getCombatHandler() {
+        return combatHandler;
+    }
+
     @Override
     public void onEnable() {
         instance = this;
         log.info("§e======= §5Nebula TownyCore §e=======");
 
-        setupListeners();
-
         Translation.loadStrings();
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new MobSpawningTask(this), 0L, 20L);
-
+        setupListeners();
+        setupHandlers();
         setupCommands();
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new MobSpawningTask(this), 0L, 20L);
 
         Bukkit.broadcastMessage(PREFIX + "Core Plugin has been loaded.");
     }
@@ -46,6 +53,10 @@ public final class Core extends JavaPlugin {
     private void setupListeners() {
         getServer().getPluginManager().registerEvents(new EventListener(), this);
         getServer().getPluginManager().registerEvents(new ShulkerListener(), this);
+    }
+
+    private void setupHandlers() {
+        combatHandler = new CombatHandler();
     }
 
     private void setupCommands() {
@@ -59,5 +70,7 @@ public final class Core extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         Bukkit.broadcastMessage(PREFIX + "Core Plugin has been disabled.");
+
+        combatHandler.onDisable();
     }
 }
