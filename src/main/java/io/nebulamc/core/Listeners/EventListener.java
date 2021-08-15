@@ -86,14 +86,14 @@ public class EventListener implements Listener {
     @EventHandler
     public void onInventoryMove(InventoryClickEvent event) {
         if (event.getInventory().getType() == InventoryType.SHULKER_BOX) {
+            if(event.getClick().isKeyboardClick()){
+                event.setCancelled(true);
+                Bukkit.getPlayer(event.getWhoClicked().getUniqueId()).sendMessage(prefix + "Hotkey movement is disabled for shulkers.");
+            }
             if (event.getCurrentItem().getType() == Material.GOLDEN_APPLE || event.getCurrentItem().getType() == Material.ENCHANTED_GOLDEN_APPLE || event.getCurrentItem().getType() == Material.EXPERIENCE_BOTTLE || event.getCurrentItem().getType() == Material.POTION || event.getCurrentItem().getType() == Material.SPLASH_POTION || event.getCurrentItem().getType() == Material.LINGERING_POTION || event.getCurrentItem().getType() == Material.GOLD_NUGGET || event.getCurrentItem().getType() == Material.GOLD_INGOT || event.getCurrentItem().getType() == Material.GOLD_ORE || event.getCurrentItem().getType() == Material.DEEPSLATE_GOLD_ORE || event.getCurrentItem().getType() == Material.GOLD_BLOCK || event.getCurrentItem().getType() == Material.RAW_GOLD || event.getCurrentItem().getType() == Material.RAW_GOLD_BLOCK) {
                 event.setCancelled(true);
                 Bukkit.getPlayer(event.getWhoClicked().getUniqueId()).sendMessage(prefix + "You can not move that item into shulkers!");
             }
-        }
-        if(event.getClick().isKeyboardClick()){
-            event.setCancelled(true);
-            Bukkit.getPlayer(event.getWhoClicked().getUniqueId()).sendMessage(prefix + "Hotkey movement is disabled for shulkers.");
         }
     }
 
