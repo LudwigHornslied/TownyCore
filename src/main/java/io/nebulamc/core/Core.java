@@ -33,7 +33,9 @@ public final class Core extends JavaPlugin {
 
         //Register Commands
         log.info("§5= §bRegistering Commands");
-
+        Objects.requireNonNull(getCommand("rtp")).setExecutor(new RTP());
+        Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColor());
+        Objects.requireNonNull(getCommand("core")).setExecutor(new CoreCmd());
 
         Bukkit.broadcastMessage(prefix + "Core Plugin has been loaded.");
     }
