@@ -70,11 +70,11 @@ public class MapColorCommand implements CommandExecutor {
             color = MapColor.valueOf(args[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             player.sendMessage("§b==========[COLORS]==========");
-            for (int i = 0; i < Math.ceil((double) MapColor.values().length / 7); i++) {
+            for (int i = 0; i < Math.ceil((double) MapColor.values().length / 6); i++) {
                 StringJoiner sj = new StringJoiner(ChatColor.GRAY + ", ");
-                for (int j = 0; j < 7 || i * 7 + j < MapColor.values().length; j++) {
-                    MapColor value = MapColor.values()[i * 7 + j];
-                    sj.add(value.getChatColor() + StringUtils.capitalize(value.toString()));
+                for (int j = 0; j < 6 && i * 6 + j < MapColor.values().length; j++) {
+                    MapColor value = MapColor.values()[i * 6 + j];
+                    sj.add(value.getChatColor() + StringUtils.capitalize(value.toString().toLowerCase()));
                 }
                 player.sendMessage(sj.toString());
             }
@@ -83,7 +83,7 @@ public class MapColorCommand implements CommandExecutor {
         }
 
         nation.setMapColorHexCode(color.getHexCode());
-        player.sendMessage(Core.PREFIX + "Nation color changed to " + color.getChatColor() + StringUtils.capitalize(color.toString()));
+        player.sendMessage(Core.PREFIX + "Nation color changed to " + color.getChatColor() + StringUtils.capitalize(color.toString().toLowerCase()));
 
         return true;
     }
