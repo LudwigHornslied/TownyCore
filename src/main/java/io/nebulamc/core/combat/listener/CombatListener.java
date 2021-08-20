@@ -1,6 +1,14 @@
 package io.nebulamc.core.combat.listener;
 
 import com.google.common.collect.ImmutableSet;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
+import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
+import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.object.TownBlockType;
+import com.palmergames.bukkit.towny.object.TownyWorld;
+import com.palmergames.bukkit.towny.object.Translation;
+import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.Core;
 import io.nebulamc.core.combat.CombatHandler;
 import net.kyori.adventure.text.Component;
@@ -114,6 +122,25 @@ public class CombatListener implements Listener {
 
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "You can't use that command while being in combat.");
+    }
+
+    // Prevent claim hopping
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPvP(TownyPlayerDamagePlayerEvent event) {
+        if(!event.isCancelled())
+            return;
+
+        TownyWorld world = TownyAPI.getInstance().getTownyWorld(event.getVictimPlayer().getWorld().getName());
+        Player attacker = event.getAttackingPlayer();
+        Player victim = event.getVictimPlayer();
+
+        if (!world.isFriendlyFireEnabled() && CombatUtil.isAlly(attacker.getName(), victim.getName()))
+            return;
+
+        if(!Core.getInstance().getCombatHandler().isTagged(victim))
+            return;
+
+        event.setCancelled(false);
     }
 
     /* Just edit purpur configuration and put enderpearl cooldown on 320 ticks (16 seconds)
