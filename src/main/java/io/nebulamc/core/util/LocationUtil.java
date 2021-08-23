@@ -1,12 +1,12 @@
-package io.nebulamc.core.Util;
+package io.nebulamc.core.util;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
-public class LocationCheck {
+public class LocationUtil {
 
-    public static boolean isSafeLocation(Location location) {
+    public static boolean isSafe(Location location) {
         // Ensure the player's feet aren't in a block
         Block feet = location.getBlock();
         if (!feet.getType().isAir()) {

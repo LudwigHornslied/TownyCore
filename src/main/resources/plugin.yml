@@ -5,6 +5,8 @@ api-version: 1.17
 authors: [ 0xBit ]
 description: The Main Core Plugin for Nebula Towny
 website: https://nebulamc.io/plugins/core
+depend:
+  - Towny
 permissions:
   nebula.core.rtp:
     description: Allows you to use /rtp
