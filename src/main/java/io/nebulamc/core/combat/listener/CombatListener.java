@@ -41,20 +41,27 @@ public class CombatListener implements Listener {
             return;
 
         Player damagee = (Player) event.getEntity();
+        Player damager;
 
         CombatHandler combatHandler = Core.getInstance().getCombatHandler();
 
         if (event.getDamager() instanceof Player) {
-            combatHandler.apply(damagee);
-            combatHandler.apply((Player) event.getDamager());
+            damager = (Player) event.getDamager();
         } else if (event.getDamager() instanceof Projectile) {
             ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
             if(shooter == null || !(shooter instanceof Player))
                 return;
 
-            combatHandler.apply(damagee);
-            combatHandler.apply((Player) shooter);
+            damager = (Player) shooter;
+        } else {
+            return;
         }
+
+        if(damager.equals(damagee))
+            return;
+
+        combatHandler.apply(damagee);
+        combatHandler.apply(damager);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
