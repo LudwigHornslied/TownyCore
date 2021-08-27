@@ -10,6 +10,7 @@ import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.object.Translation;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.Core;
+import io.nebulamc.core.PermissionNodes;
 import io.nebulamc.core.combat.CombatHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
@@ -110,6 +111,9 @@ public class CombatListener implements Listener {
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         if(!Core.getInstance().getCombatHandler().isTagged(player))
+            return;
+
+        if(player.hasPermission(PermissionNodes.COMBATLOG_BYPASS))
             return;
 
         String message = event.getMessage();
