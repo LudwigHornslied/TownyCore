@@ -10,6 +10,7 @@ import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.object.Translation;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.Core;
+import io.nebulamc.core.PermissionNodes;
 import io.nebulamc.core.combat.CombatHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
@@ -40,20 +41,27 @@ public class CombatListener implements Listener {
             return;
 
         Player damagee = (Player) event.getEntity();
+        Player damager;
 
         CombatHandler combatHandler = Core.getInstance().getCombatHandler();
 
         if (event.getDamager() instanceof Player) {
-            combatHandler.apply(damagee);
-            combatHandler.apply((Player) event.getDamager());
+            damager = (Player) event.getDamager();
         } else if (event.getDamager() instanceof Projectile) {
             ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
             if(shooter == null || !(shooter instanceof Player))
                 return;
 
-            combatHandler.apply(damagee);
-            combatHandler.apply((Player) shooter);
+            damager = (Player) shooter;
+        } else {
+            return;
         }
+
+        if(damager.equals(damagee))
+            return;
+
+        combatHandler.apply(damagee);
+        combatHandler.apply(damager);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -110,6 +118,9 @@ public class CombatListener implements Listener {
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         if(!Core.getInstance().getCombatHandler().isTagged(player))
+            return;
+
+        if(player.hasPermission(PermissionNodes.COMBATLOG_BYPASS))
             return;
 
         String message = event.getMessage();
