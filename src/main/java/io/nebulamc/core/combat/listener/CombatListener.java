@@ -2,12 +2,8 @@ package io.nebulamc.core.combat.listener;
 
 import com.google.common.collect.ImmutableSet;
 import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
-import com.palmergames.bukkit.towny.object.TownBlock;
-import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownyWorld;
-import com.palmergames.bukkit.towny.object.Translation;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.Core;
 import io.nebulamc.core.PermissionNodes;
@@ -15,6 +11,7 @@ import io.nebulamc.core.combat.CombatHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -23,6 +20,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.projectiles.ProjectileSource;
@@ -49,7 +48,7 @@ public class CombatListener implements Listener {
             damager = (Player) event.getDamager();
         } else if (event.getDamager() instanceof Projectile) {
             ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
-            if(shooter == null || !(shooter instanceof Player))
+            if (shooter == null || !(shooter instanceof Player))
                 return;
 
             damager = (Player) shooter;
@@ -57,7 +56,7 @@ public class CombatListener implements Listener {
             return;
         }
 
-        if(damager.equals(damagee))
+        if (damager.equals(damagee))
             return;
 
         combatHandler.apply(damagee);
@@ -74,7 +73,7 @@ public class CombatListener implements Listener {
 
         event.setCancelled(true);
 
-        event.getPlayer().sendMessage(ChatColor.RED + "You can't place cobwebs while combat tagged.");
+        event.getPlayer().sendMessage(ChatColor.RED + "You can't place cobwebs while being in combat.");
     }
 
     @EventHandler
@@ -85,7 +84,7 @@ public class CombatListener implements Listener {
 
         combatHandler.removeBossBar(player);
 
-        if(!combatHandler.isTagged(player))
+        if (!combatHandler.isTagged(player))
             return;
 
         combatHandler.remove(player);
@@ -97,14 +96,14 @@ public class CombatListener implements Listener {
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
 
-        if(deathsForLoggingOut.contains(player.getUniqueId())) {
+        if (deathsForLoggingOut.contains(player.getUniqueId())) {
             deathsForLoggingOut.remove(player.getUniqueId());
             event.deathMessage(Component.text(player.getName() + " was killed for logging out in combat."));
         }
 
         CombatHandler combatHandler = Core.getInstance().getCombatHandler();
 
-        if(!combatHandler.isTagged(player))
+        if (!combatHandler.isTagged(player))
             return;
 
         combatHandler.remove(player);
@@ -117,16 +116,16 @@ public class CombatListener implements Listener {
     @EventHandler
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if(!Core.getInstance().getCombatHandler().isTagged(player))
+        if (!Core.getInstance().getCombatHandler().isTagged(player))
             return;
 
-        if(player.hasPermission(PermissionNodes.COMBATLOG_BYPASS))
+        if (player.hasPermission(PermissionNodes.COMBATLOG_BYPASS))
             return;
 
         String message = event.getMessage();
         message = message.replaceFirst("/", "");
 
-        for(String value : WHITELISTED_COMMANDS) {
+        for (String value : WHITELISTED_COMMANDS) {
             if (message.equalsIgnoreCase(value) || message.toLowerCase().startsWith(value + " "))
                 return;
         }
@@ -138,7 +137,7 @@ public class CombatListener implements Listener {
     // Prevent claim hopping
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPvP(TownyPlayerDamagePlayerEvent event) {
-        if(!event.isCancelled())
+        if (!event.isCancelled())
             return;
 
         TownyWorld world = TownyAPI.getInstance().getTownyWorld(event.getVictimPlayer().getWorld().getName());
@@ -148,10 +147,27 @@ public class CombatListener implements Listener {
         if (!world.isFriendlyFireEnabled() && CombatUtil.isAlly(attacker.getName(), victim.getName()))
             return;
 
-        if(!Core.getInstance().getCombatHandler().isTagged(victim))
+        if (!Core.getInstance().getCombatHandler().isTagged(victim))
             return;
 
         event.setCancelled(false);
+    }
+
+    @EventHandler
+    public void onOpen(InventoryOpenEvent event) {
+        if (event.getInventory().getType() != InventoryType.ENDER_CHEST)
+            return;
+
+        if(!(event.getPlayer() instanceof Player))
+            return;
+
+        Player player = (Player) event.getPlayer();
+
+        if(!Core.getInstance().getCombatHandler().isTagged(player))
+            return;
+
+        event.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "You can't use ender chest while being in combat.");
     }
 
     /* Just edit purpur configuration and put enderpearl cooldown on 320 ticks (16 seconds)
