@@ -17,7 +17,7 @@ public class MobSpawningTask implements Runnable {
 
     @Override
     public void run() {
-        double tps = Bukkit.getTPS()[0];
+        double tps = Bukkit.getTPS()[1];
 
         if (tps < 18 && this.spawning) {
             this.spawning = false;
@@ -31,10 +31,14 @@ public class MobSpawningTask implements Runnable {
     }
 
     private void update() {
-        if (Bukkit.getOnlinePlayers().size() >= 100) {
-            for (World world : plugin.getServer().getWorlds()) {
-                world.setGameRule(GameRule.DO_MOB_SPAWNING, this.spawning);
+            if (Bukkit.getOnlinePlayers().size() <= 100) {
+                for (World world : plugin.getServer().getWorlds()) {
+                    world.setGameRule(GameRule.DO_MOB_SPAWNING, this.spawning);
+                }
+            } else {
+                for (World world : plugin.getServer().getWorlds()) {
+                    world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
+                }
             }
-        }
     }
 }
