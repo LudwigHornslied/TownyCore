@@ -22,7 +22,7 @@ public class CombatHandler {
 
     private static final long TAG_TIME = 45 * 1000;
 
-    private Map<UUID, Long> combatTags = new ConcurrentHashMap<>();
+    private static Map<UUID, Long> combatTags = new ConcurrentHashMap<>();
 
     public CombatHandler() {
         Bukkit.getPluginManager().registerEvents(new CombatListener(), Core.getInstance());
@@ -81,7 +81,7 @@ public class CombatHandler {
         }.runTaskTimer(Core.getInstance(), 10L, 10L);
     }
 
-    public void apply(Player player) {
+    public static void apply(Player player) {
         if(!isTagged(player)) {
             player.closeInventory(Reason.PLUGIN);
             player.sendMessage(ChatColor.RED + "You have been combat tagged for " + (TAG_TIME/1000) + " seconds! Do not log out or you will get killed instantly.");
@@ -90,11 +90,11 @@ public class CombatHandler {
         combatTags.put(player.getUniqueId(), System.currentTimeMillis() + TAG_TIME);
     }
 
-    public void remove(Player player) {
+    public static void remove(Player player) {
         combatTags.remove(player.getUniqueId());
     }
 
-    public boolean isTagged(Player player) {
+    public static boolean isTagged(Player player) {
         return combatTags.containsKey(player.getUniqueId()) && combatTags.get(player.getUniqueId()) > System.currentTimeMillis();
     }
 

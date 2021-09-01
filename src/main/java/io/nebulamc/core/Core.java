@@ -1,6 +1,7 @@
 package io.nebulamc.core;
 
 import io.nebulamc.core.combat.CombatHandler;
+import io.nebulamc.core.commands.CombatTag;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
@@ -28,7 +29,7 @@ public final class Core extends JavaPlugin {
     public static final String PREFIX = ChatColor.of("#BAE6FF").toString() + ChatColor.BOLD + "N" + ChatColor.of("#BADDFF").toString() + ChatColor.BOLD + "e" + ChatColor.of("#BAD4FF").toString() + ChatColor.BOLD + "b" + ChatColor.of("#BBCBFF").toString() + ChatColor.BOLD + "u" + ChatColor.of("#BBC2FF").toString() + ChatColor.BOLD + "l" + ChatColor.of("#BCBAFF").toString() + ChatColor.BOLD + "a" + ChatColor.of("#ecabff").toString() + ChatColor.BOLD + " Towny " + ChatColor.WHITE + "• " + ChatColor.RESET + "§6";
     public static final String DISCORD = "https://discord.gg/nebulamc";
 
-    private CombatHandler combatHandler;
+    public CombatHandler combatHandler;
 
     public CombatHandler getCombatHandler() {
         return combatHandler;
@@ -64,6 +65,7 @@ public final class Core extends JavaPlugin {
         Objects.requireNonNull(getCommand("rtp")).setExecutor(new RTPCommand());
         Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColorCommand());
         Objects.requireNonNull(getCommand("core")).setExecutor(new CoreCommand());
+        Objects.requireNonNull(getCommand("combattag")).setExecutor(new CombatTag());
     }
 
     @Override

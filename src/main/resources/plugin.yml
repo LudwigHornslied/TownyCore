@@ -27,3 +27,8 @@ commands:
     permission: nebula.command.core
     permission-message: You do not have permission to run this command!
     usage: /core <args>
+  combattag:
+    description: Assists admins in tagging and untagging users.
+    permission: nebula.command.combattag
+    permission-message: You do not have permission to run this command!
+    usage: /combattag help
