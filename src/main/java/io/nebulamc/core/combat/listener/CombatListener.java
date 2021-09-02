@@ -6,12 +6,11 @@ import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
 import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.Core;
-import io.nebulamc.core.PermissionNodes;
 import io.nebulamc.core.combat.CombatHandler;
+import io.nebulamc.core.combat.bossbar.BossBarTask;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -42,8 +41,6 @@ public class CombatListener implements Listener {
         Player damagee = (Player) event.getEntity();
         Player damager;
 
-        CombatHandler combatHandler = Core.getInstance().getCombatHandler();
-
         if (event.getDamager() instanceof Player) {
             damager = (Player) event.getDamager();
         } else if (event.getDamager() instanceof Projectile) {
@@ -59,8 +56,8 @@ public class CombatListener implements Listener {
         if (damager.equals(damagee))
             return;
 
-        combatHandler.apply(damagee);
-        combatHandler.apply(damager);
+        CombatHandler.applyTag(damagee);
+        CombatHandler.applyTag(damager);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -68,7 +65,7 @@ public class CombatListener implements Listener {
         if (event.getBlockPlaced().getType() != Material.COBWEB)
             return;
 
-        if (!Core.getInstance().getCombatHandler().isTagged(event.getPlayer()))
+        if (!CombatHandler.isTagged(event.getPlayer()))
             return;
 
         event.setCancelled(true);
@@ -80,14 +77,12 @@ public class CombatListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        CombatHandler combatHandler = Core.getInstance().getCombatHandler();
+        BossBarTask.remove(player);
 
-        combatHandler.removeBossBar(player);
-
-        if (!combatHandler.isTagged(player))
+        if (!CombatHandler.isTagged(player))
             return;
 
-        combatHandler.remove(player);
+        CombatHandler.removeTag(player);
         deathsForLoggingOut.add(player.getUniqueId());
         player.setHealth(0.0);
     }
@@ -101,25 +96,19 @@ public class CombatListener implements Listener {
             event.deathMessage(Component.text(player.getName() + " was killed for logging out in combat."));
         }
 
-        CombatHandler combatHandler = Core.getInstance().getCombatHandler();
-
-        if (!combatHandler.isTagged(player))
+        if (!CombatHandler.isTagged(player))
             return;
 
-        combatHandler.remove(player);
-        combatHandler.getBossBar(player).setVisible(false);
+        CombatHandler.removeTag(player);
     }
 
     // Lowercase
-    private static final Set<String> WHITELISTED_COMMANDS = ImmutableSet.of("tc", "nc", "g", "ally", "msg", "r", "reply");
+    private static final Set<String> WHITELISTED_COMMANDS = ImmutableSet.of("tc", "nc", "g", "ally", "msg", "r", "reply", "combattag");
 
     @EventHandler
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if (!Core.getInstance().getCombatHandler().isTagged(player))
-            return;
-
-        if (player.hasPermission(PermissionNodes.COMBATLOG_BYPASS))
+        if (!CombatHandler.isTagged(player))
             return;
 
         String message = event.getMessage();
@@ -147,7 +136,7 @@ public class CombatListener implements Listener {
         if (!world.isFriendlyFireEnabled() && CombatUtil.isAlly(attacker.getName(), victim.getName()))
             return;
 
-        if (!Core.getInstance().getCombatHandler().isTagged(victim))
+        if (!CombatHandler.isTagged(victim))
             return;
 
         event.setCancelled(false);
@@ -158,12 +147,12 @@ public class CombatListener implements Listener {
         if (event.getInventory().getType() != InventoryType.ENDER_CHEST)
             return;
 
-        if(!(event.getPlayer() instanceof Player))
+        if (!(event.getPlayer() instanceof Player))
             return;
 
         Player player = (Player) event.getPlayer();
 
-        if(!Core.getInstance().getCombatHandler().isTagged(player))
+        if (!CombatHandler.isTagged(player))
             return;
 
         event.setCancelled(true);

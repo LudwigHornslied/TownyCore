@@ -1,7 +1,9 @@
 package io.nebulamc.core;
 
 import io.nebulamc.core.combat.CombatHandler;
-import io.nebulamc.core.commands.CombatTag;
+import io.nebulamc.core.combat.bossbar.BossBarTask;
+import io.nebulamc.core.combat.listener.CombatListener;
+import io.nebulamc.core.commands.CombatTagCommand;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
@@ -43,10 +45,8 @@ public final class Core extends JavaPlugin {
         Translation.loadStrings();
 
         setupListeners();
-        setupHandlers();
         setupCommands();
-
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new MobSpawningTask(this), 0L, 20L);
+        runTasks();
 
         Bukkit.broadcastMessage(PREFIX + "Core Plugin has been loaded.");
     }
@@ -54,10 +54,7 @@ public final class Core extends JavaPlugin {
     private void setupListeners() {
         getServer().getPluginManager().registerEvents(new EventListener(), this);
         getServer().getPluginManager().registerEvents(new ShulkerListener(), this);
-    }
-
-    private void setupHandlers() {
-        combatHandler = new CombatHandler();
+        getServer().getPluginManager().registerEvents(new CombatListener(), this);
     }
 
     private void setupCommands() {
@@ -65,14 +62,17 @@ public final class Core extends JavaPlugin {
         Objects.requireNonNull(getCommand("rtp")).setExecutor(new RTPCommand());
         Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColorCommand());
         Objects.requireNonNull(getCommand("core")).setExecutor(new CoreCommand());
-        Objects.requireNonNull(getCommand("combattag")).setExecutor(new CombatTag());
+        Objects.requireNonNull(getCommand("combattag")).setExecutor(new CombatTagCommand());
+    }
+
+    private void runTasks() {
+        new MobSpawningTask().runTaskTimer(this, 20, 20);
+        new BossBarTask().runTaskTimer(this, 10, 10);
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
         Bukkit.broadcastMessage(PREFIX + "Core Plugin has been disabled.");
-
-        combatHandler.onDisable();
     }
 }

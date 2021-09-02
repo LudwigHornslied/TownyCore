@@ -5,15 +5,11 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.World;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class MobSpawningTask implements Runnable {
-    private final JavaPlugin plugin;
+public class MobSpawningTask extends BukkitRunnable {
+
     private boolean spawning = true;
-
-    public MobSpawningTask(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public void run() {
@@ -31,14 +27,14 @@ public class MobSpawningTask implements Runnable {
     }
 
     private void update() {
-            if (Bukkit.getOnlinePlayers().size() <= 100) {
-                for (World world : plugin.getServer().getWorlds()) {
-                    world.setGameRule(GameRule.DO_MOB_SPAWNING, this.spawning);
-                }
-            } else {
-                for (World world : plugin.getServer().getWorlds()) {
-                    world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
-                }
+        if (Bukkit.getOnlinePlayers().size() <= 100) {
+            for (World world : Bukkit.getWorlds()) {
+                world.setGameRule(GameRule.DO_MOB_SPAWNING, this.spawning);
             }
+        } else {
+            for (World world : Bukkit.getWorlds()) {
+                world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
+            }
+        }
     }
 }

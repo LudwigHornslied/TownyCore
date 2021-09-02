@@ -14,7 +14,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class EventListener implements Listener {
-    boolean mobSpawning;
+
     @EventHandler
     public void preMobSpawn(PreCreatureSpawnEvent event) {
         EntityType ent = event.getType();
