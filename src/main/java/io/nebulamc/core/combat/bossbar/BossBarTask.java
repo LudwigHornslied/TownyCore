@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BossBarTask extends BukkitRunnable {
 
-    private Map<UUID, BossBar> bossBarMap = new ConcurrentHashMap<>();
+    private static Map<UUID, BossBar> bossBarMap = new ConcurrentHashMap<>();
 
     @Override
     public void run() {
@@ -41,7 +41,7 @@ public class BossBarTask extends BukkitRunnable {
         }
     }
 
-    public void update(Player player) {
+    public static void update(Player player) {
         BossBar bossBar = bossBarMap.get(player.getUniqueId());
         if (bossBar == null)
             return;
@@ -52,5 +52,9 @@ public class BossBarTask extends BukkitRunnable {
 
         bossBar.setTitle(ChatColor.RED + ChatColor.BOLD.toString() + "Combat Tag" + ChatColor.GRAY + ": " + ChatColor.RED + (remaining / 1000) + "s");
         bossBar.setProgress((double) remaining / CombatHandler.TAG_TIME);
+    }
+
+    public static void remove(Player player) {
+        bossBarMap.remove(player.getUniqueId());
     }
 }

@@ -7,6 +7,7 @@ import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.Core;
 import io.nebulamc.core.combat.CombatHandler;
+import io.nebulamc.core.combat.bossbar.BossBarTask;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -76,6 +77,8 @@ public class CombatListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
+        BossBarTask.remove(player);
+
         if (!CombatHandler.isTagged(player))
             return;
 
@@ -100,7 +103,7 @@ public class CombatListener implements Listener {
     }
 
     // Lowercase
-    private static final Set<String> WHITELISTED_COMMANDS = ImmutableSet.of("tc", "nc", "g", "ally", "msg", "r", "reply");
+    private static final Set<String> WHITELISTED_COMMANDS = ImmutableSet.of("tc", "nc", "g", "ally", "msg", "r", "reply", "combattag");
 
     @EventHandler
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
