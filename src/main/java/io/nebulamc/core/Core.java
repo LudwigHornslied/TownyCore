@@ -7,6 +7,7 @@ import io.nebulamc.core.commands.CombatTagCommand;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
+import io.nebulamc.core.listeners.EXPBottleListener;
 import io.nebulamc.core.listeners.EventListener;
 import io.nebulamc.core.listeners.ShulkerListener;
 import io.nebulamc.core.tasks.MobSpawningTask;
@@ -55,6 +56,7 @@ public final class Core extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventListener(), this);
         getServer().getPluginManager().registerEvents(new ShulkerListener(), this);
         getServer().getPluginManager().registerEvents(new CombatListener(), this);
+        getServer().getPluginManager().registerEvents(new EXPBottleListener(), this);
     }
 
     private void setupCommands() {
