@@ -5,7 +5,6 @@ import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
 import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
-import io.nebulamc.core.Core;
 import io.nebulamc.core.combat.CombatHandler;
 import io.nebulamc.core.combat.bossbar.BossBarTask;
 import net.kyori.adventure.text.Component;
@@ -22,6 +21,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -157,6 +157,20 @@ public class CombatListener implements Listener {
 
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "You can't use ender chest while being in combat.");
+    }
+
+    @EventHandler
+    public void onRiptide(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+
+        if (!CombatHandler.isTagged(player))
+            return;
+
+        if (!player.isRiptiding())
+            return;
+
+        event.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "The riptide enchantment is disabled while being in combat.");
     }
 
     /* Just edit purpur configuration and put enderpearl cooldown on 320 ticks (16 seconds)
