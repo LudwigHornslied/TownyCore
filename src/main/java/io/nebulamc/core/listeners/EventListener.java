@@ -28,17 +28,21 @@ public class EventListener implements Listener {
                 ent == EntityType.DONKEY ||
                 ent == EntityType.MULE ||
                 ent == EntityType.BAT ||
-                ent == EntityType.SQUID ||
                 ent == EntityType.COD ||
                 ent == EntityType.ENDERMITE ||
                 ent == EntityType.TROPICAL_FISH ||
                 ent == EntityType.LLAMA ||
                 ent == EntityType.TRADER_LLAMA ||
                 ent == EntityType.VEX ||
-                ent == EntityType.GLOW_SQUID ||
-                ent == EntityType.AXOLOTL ||
                 ent == EntityType.SKELETON_HORSE ||
                 ent == EntityType.DOLPHIN
+
+                /* Possibly Fixed in Purpur finally
+                ent == EntityType.GLOW_SQUID ||
+                ent == EntityType.AXOLOTL ||
+                ent == EntityType.SQUID ||
+                 */
+
                 ) {
             event.setCancelled(true);
         }
