@@ -29,7 +29,7 @@ public final class Core extends JavaPlugin {
 
     private static Logger log = Bukkit.getLogger();
 
-    public static final String PREFIX = ChatColor.of("#BAE6FF").toString() + ChatColor.BOLD + "N" + ChatColor.of("#BADDFF").toString() + ChatColor.BOLD + "e" + ChatColor.of("#BAD4FF").toString() + ChatColor.BOLD + "b" + ChatColor.of("#BBCBFF").toString() + ChatColor.BOLD + "u" + ChatColor.of("#BBC2FF").toString() + ChatColor.BOLD + "l" + ChatColor.of("#BCBAFF").toString() + ChatColor.BOLD + "a" + ChatColor.of("#ecabff").toString() + ChatColor.BOLD + " Towny " + ChatColor.WHITE + "• " + ChatColor.RESET + "§6";
+    public static final String PREFIX = ChatColor.of("#3fb78d").toString() + ChatColor.BOLD + "E" + ChatColor.of("#57c28a").toString() + ChatColor.BOLD + "a" + ChatColor.of("#6fcd85").toString() + ChatColor.BOLD + "r" + ChatColor.of("#88d880").toString() + ChatColor.BOLD + "t" + ChatColor.of("#a3e27a").toString() + ChatColor.BOLD + "h" + ChatColor.of("#beeb75").toString() + ChatColor.BOLD + "P" + ChatColor.of("#dcf371").toString() + ChatColor.BOLD + "o" + + ChatColor.of("#fafa6e").toString() + ChatColor.BOLD + "l" + ChatColor.WHITE + " • " + ChatColor.RESET + "§6";
     public static final String DISCORD = "https://discord.gg/nebulamc";
 
     public CombatHandler combatHandler;
