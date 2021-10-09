@@ -32,3 +32,11 @@ commands:
     permission: nebula.command.combattag
     permission-message: You do not have permission to run this command!
     usage: /combattag help
+  boat:
+    description: Allow people to spawn in boats on ice road.
+    permission: earthpol.command.boat
+    permission-message: You do not have permission to run this command!
+  cart:
+    description: Allow people to spawn in minecarts on railroad.
+    permission: earthpol.command.cart
+    permission-message: You do not have permission to run this command!
