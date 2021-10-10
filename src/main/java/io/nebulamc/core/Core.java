@@ -7,6 +7,7 @@ import io.nebulamc.core.commands.CombatTagCommand;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
+import io.nebulamc.core.commands.TransportationCommand;
 import io.nebulamc.core.listeners.EXPBottleListener;
 import io.nebulamc.core.listeners.EventListener;
 import io.nebulamc.core.listeners.ShulkerListener;
@@ -14,6 +15,11 @@ import io.nebulamc.core.tasks.MobSpawningTask;
 import io.nebulamc.core.util.Translation;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Vehicle;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -65,6 +71,11 @@ public final class Core extends JavaPlugin {
         Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColorCommand());
         Objects.requireNonNull(getCommand("core")).setExecutor(new CoreCommand());
         Objects.requireNonNull(getCommand("combattag")).setExecutor(new CombatTagCommand());
+
+        TransportationCommand transportationCommand = new TransportationCommand();
+
+        Objects.requireNonNull(getCommand("boat")).setExecutor(transportationCommand);
+        Objects.requireNonNull(getCommand("cart")).setExecutor(transportationCommand);
     }
 
     private void runTasks() {
@@ -75,6 +86,18 @@ public final class Core extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        despawnTransportations();
+
         Bukkit.broadcastMessage(PREFIX + "Core Plugin has been disabled.");
+    }
+
+    private void despawnTransportations() {
+        for(World world : Bukkit.getWorlds()) {
+            for(Vehicle vehicle : world.getEntitiesByClass(Vehicle.class)) {
+                if(vehicle.getPersistentDataContainer().has(new NamespacedKey(Core.getInstance(), "CustomVehicle"), PersistentDataType.BYTE)) {
+                    vehicle.remove();
+                }
+            }
+        }
     }
 }
