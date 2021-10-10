@@ -26,6 +26,8 @@ public class EXPBottleListener implements Listener {
             return;
 
         ItemStack item = event.getItem();
+        if(item == null)
+            return;
 
         if (item.getType() != Material.GLASS_BOTTLE)
             return;
