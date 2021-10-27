@@ -29,9 +29,9 @@ public class CombatTagCommand implements CommandExecutor {
             case "untag":
                 parseUntagCommand(sender, args);
                 break;
-			default:
-				sender.sendMessage("§7[§bCombatTag§7]: §eIncorrect Usage: §e/combattag help");
-				break;
+            default:
+                sender.sendMessage("§7[§bCombatTag§7]: §eIncorrect Usage: §e/combattag help");
+                break;
         }
         return true;
     }
