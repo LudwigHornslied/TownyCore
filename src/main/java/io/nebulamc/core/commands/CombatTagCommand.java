@@ -14,8 +14,7 @@ public class CombatTagCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if (args.length < 1) {
-            sender.sendMessage("§7[§bCombatTag§7]: §eIncorrect Usage: §ePlease specific a usage");
-            sender.sendMessage("§7[§bCombatTag§7]: §eSee /combattag help");
+            showHelp(sender);
             return true;
         }
 
@@ -30,7 +29,9 @@ public class CombatTagCommand implements CommandExecutor {
             case "untag":
                 parseUntagCommand(sender, args);
                 break;
-
+            default:
+                sender.sendMessage("§7[§bCombatTag§7]: §eIncorrect Usage: §e/combattag help");
+                break;
         }
         return true;
     }
@@ -83,6 +84,7 @@ public class CombatTagCommand implements CommandExecutor {
 
         if(!CombatHandler.isTagged(target)) {
             sender.sendMessage("§7[§bCombatTag§7]: §cPlayer is not combat tagged.");
+			return;
         }
 
         CombatHandler.removeTag(target);
