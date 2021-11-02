@@ -84,7 +84,7 @@ public class CombatTagCommand implements CommandExecutor {
 
         if(!CombatHandler.isTagged(target)) {
             sender.sendMessage("§7[§bCombatTag§7]: §cPlayer is not combat tagged.");
-			return;
+            return;
         }
 
         CombatHandler.removeTag(target);
