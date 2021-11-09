@@ -52,6 +52,8 @@ public class EventListener implements Listener {
     public void playerLogin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+		player.sendMessage("§3 §6 §3 §6 §3 §6 §e §3 §6 §3 §6 §3 §6 §d §r");
+
         if (!player.hasPlayedBefore()) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.5f, 1.0f);
 
