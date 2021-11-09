@@ -7,6 +7,7 @@ import io.nebulamc.core.commands.CombatTagCommand;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
+import io.nebulamc.core.commands.SayCommand;
 import io.nebulamc.core.commands.TransportationCommand;
 import io.nebulamc.core.listeners.EXPBottleListener;
 import io.nebulamc.core.listeners.EventListener;

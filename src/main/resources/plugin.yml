@@ -40,3 +40,7 @@ commands:
     description: Allow people to spawn in minecarts on railroad.
     permission: earthpol.command.cart
     permission-message: You do not have permission to run this command!
+  say:
+    description: Broadcast message to the server with shiny prefix
+    permission: earthpol.command.say
+    permission-message: You do not have permission to run this command!
