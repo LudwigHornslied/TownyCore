@@ -72,6 +72,7 @@ public final class Core extends JavaPlugin {
         Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColorCommand());
         Objects.requireNonNull(getCommand("core")).setExecutor(new CoreCommand());
         Objects.requireNonNull(getCommand("combattag")).setExecutor(new CombatTagCommand());
+        Objects.requireNonNull(getCommand("say")).setExecutor(new CoreCommand());
 
         TransportationCommand transportationCommand = new TransportationCommand();
 
