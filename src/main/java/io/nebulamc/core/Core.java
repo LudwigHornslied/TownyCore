@@ -11,6 +11,7 @@ import io.nebulamc.core.commands.TransportationCommand;
 import io.nebulamc.core.listeners.EXPBottleListener;
 import io.nebulamc.core.listeners.EventListener;
 import io.nebulamc.core.listeners.ShulkerListener;
+import io.nebulamc.core.listeners.TransportationListener;
 import io.nebulamc.core.tasks.MobSpawningTask;
 import io.nebulamc.core.util.Translation;
 import net.md_5.bungee.api.ChatColor;
@@ -63,6 +64,7 @@ public final class Core extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ShulkerListener(), this);
         getServer().getPluginManager().registerEvents(new CombatListener(), this);
         getServer().getPluginManager().registerEvents(new EXPBottleListener(), this);
+        getServer().getPluginManager().registerEvents(new TransportationListener(), this);
     }
 
     private void setupCommands() {
