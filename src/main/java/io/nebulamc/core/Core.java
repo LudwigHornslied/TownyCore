@@ -7,6 +7,7 @@ import io.nebulamc.core.commands.CombatTagCommand;
 import io.nebulamc.core.commands.CoreCommand;
 import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
+import io.nebulamc.core.commands.SayCommand;
 import io.nebulamc.core.commands.TransportationCommand;
 import io.nebulamc.core.listeners.EXPBottleListener;
 import io.nebulamc.core.listeners.EventListener;
@@ -73,6 +74,7 @@ public final class Core extends JavaPlugin {
         Objects.requireNonNull(getCommand("mapcolor")).setExecutor(new MapColorCommand());
         Objects.requireNonNull(getCommand("core")).setExecutor(new CoreCommand());
         Objects.requireNonNull(getCommand("combattag")).setExecutor(new CombatTagCommand());
+        Objects.requireNonNull(getCommand("say")).setExecutor(new CoreCommand());
 
         TransportationCommand transportationCommand = new TransportationCommand();
 
