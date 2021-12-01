@@ -1,8 +1,11 @@
 package io.nebulamc.core.combat.listener;
 
 import com.google.common.collect.ImmutableSet;
+import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
+import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
 import io.nebulamc.core.combat.CombatHandler;
@@ -83,6 +86,9 @@ public class CombatListener implements Listener {
             return;
 
         CombatHandler.removeTag(player);
+
+        TownBlockType townBlockType = TownyAPI.getInstance().getTownBlock(player.getLocation()).getType();
+        if(!townBlockType.equals(TownBlockType.ARENA))
         deathsForLoggingOut.add(player.getUniqueId());
         player.setHealth(0.0);
     }
@@ -103,7 +109,7 @@ public class CombatListener implements Listener {
     }
 
     // Lowercase
-    private static final Set<String> WHITELISTED_COMMANDS = ImmutableSet.of("tc", "nc", "g", "ally", "msg", "r", "reply", "tell", "pm", "mod", "admin", "combattag");
+    private static final Set<String> WHITELISTED_COMMANDS = ImmutableSet.of("tc", "nc", "g", "ally", "msg", "r", "reply", "tell", "pm", "mod", "admin", "combattag", "lc");
 
     @EventHandler
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
