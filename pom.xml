@@ -86,5 +86,11 @@
             <version>0.97.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.TownyAdvanced</groupId>
+            <artifactId>SiegeWar</artifactId>
+            <version>0.6.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -1,7 +1,7 @@
 package io.nebulamc.core.combat.listener;
 
+import com.gmail.goosius.siegewar.SiegeController;
 import com.google.common.collect.ImmutableSet;
-import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.event.damage.TownyPlayerDamagePlayerEvent;
 import com.palmergames.bukkit.towny.object.TownBlock;
@@ -87,8 +87,10 @@ public class CombatListener implements Listener {
 
         CombatHandler.removeTag(player);
 
-        TownBlockType townBlockType = TownyAPI.getInstance().getTownBlock(player.getLocation()).getType();
-        if(!townBlockType.equals(TownBlockType.ARENA))
+        TownBlock townBlock = TownyAPI.getInstance().getTownBlock(player.getLocation());
+        if(townBlock != null && townBlock.getType() == TownBlockType.ARENA && townBlock.hasTown() && !SiegeController.hasSiege(TownyAPI.getInstance().getTown(player.getLocation())))
+            return;
+
         deathsForLoggingOut.add(player.getUniqueId());
         player.setHealth(0.0);
     }
