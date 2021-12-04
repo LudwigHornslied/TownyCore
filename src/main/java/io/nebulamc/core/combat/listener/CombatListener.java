@@ -1,5 +1,6 @@
 package io.nebulamc.core.combat.listener;
 
+import com.Acrobot.ChestShop.Events.TransactionEvent;
 import com.gmail.goosius.siegewar.SiegeController;
 import com.google.common.collect.ImmutableSet;
 import com.palmergames.bukkit.towny.TownyAPI;
@@ -179,6 +180,14 @@ public class CombatListener implements Listener {
 
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "The riptide enchantment is disabled while being in combat.");
+    }
+
+    @EventHandler
+    public void onTransaction(TransactionEvent event) {
+        if(!CombatHandler.isTagged(event.getClient()))
+            return;
+
+        event.setCancelled(true);
     }
 
     /* Just edit purpur configuration and put enderpearl cooldown on 320 ticks (16 seconds)
