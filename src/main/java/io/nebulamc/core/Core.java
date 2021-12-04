@@ -9,6 +9,7 @@ import io.nebulamc.core.commands.MapColorCommand;
 import io.nebulamc.core.commands.RTPCommand;
 import io.nebulamc.core.commands.SayCommand;
 import io.nebulamc.core.commands.TransportationCommand;
+import io.nebulamc.core.listeners.ArenaListener;
 import io.nebulamc.core.listeners.EXPBottleListener;
 import io.nebulamc.core.listeners.EventListener;
 import io.nebulamc.core.listeners.ShulkerListener;
@@ -66,6 +67,7 @@ public final class Core extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CombatListener(), this);
         getServer().getPluginManager().registerEvents(new EXPBottleListener(), this);
         getServer().getPluginManager().registerEvents(new TransportationListener(), this);
+        getServer().getPluginManager().registerEvents(new ArenaListener(), this);
     }
 
     private void setupCommands() {
