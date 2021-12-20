@@ -1,6 +1,6 @@
-package io.nebulamc.core.combat.listener;
+package com.earthpol.core.combat.listener;
 
-import com.Acrobot.ChestShop.Events.TransactionEvent;
+import com.earthpol.core.combat.CombatHandler;
 import com.gmail.goosius.siegewar.SiegeController;
 import com.google.common.collect.ImmutableSet;
 import com.palmergames.bukkit.towny.TownyAPI;
@@ -9,8 +9,7 @@ import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownyWorld;
 import com.palmergames.bukkit.towny.utils.CombatUtil;
-import io.nebulamc.core.combat.CombatHandler;
-import io.nebulamc.core.combat.bossbar.BossBarTask;
+import com.earthpol.core.combat.bossbar.BossBarTask;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -117,7 +116,7 @@ public class CombatListener implements Listener {
     @EventHandler
     public void onPreProcessCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if (!CombatHandler.isTagged(player))
+        if (!CombatHandler.isTagged(player) || player.hasPermission("earthpol.combattag.bypass"))
             return;
 
         String message = event.getMessage();
@@ -180,14 +179,6 @@ public class CombatListener implements Listener {
 
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "The riptide enchantment is disabled while being in combat.");
-    }
-
-    @EventHandler
-    public void onTransaction(TransactionEvent event) {
-        if(!CombatHandler.isTagged(event.getClient()))
-            return;
-
-        event.setCancelled(true);
     }
 
     /* Just edit purpur configuration and put enderpearl cooldown on 320 ticks (16 seconds)
