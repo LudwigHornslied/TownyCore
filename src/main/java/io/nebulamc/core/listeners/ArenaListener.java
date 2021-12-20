@@ -1,4 +1,4 @@
-package io.nebulamc.core.listeners;
+package com.earthpol.core.listeners;
 
 import com.gmail.goosius.siegewar.SiegeController;
 import com.palmergames.bukkit.towny.TownyAPI;
